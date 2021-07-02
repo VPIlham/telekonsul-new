@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "589666306246",
+    "project_id": "telekonsultasi-e5621",
+    "storage_bucket": "telekonsultasi-e5621.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589666306246:android:5552c014e8e8f0ee3cafc7",
+        "android_client_info": {
+          "package_name": "com.example.telekonsul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589666306246-02jmujc355gmrk1mibapqac044lihj6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ8i1Z5Zw0F-z4pDAyumsu_i-Q4PJQeQU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589666306246-02jmujc355gmrk1mibapqac044lihj6c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
