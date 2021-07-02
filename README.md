@@ -1,0 +1,2 @@
+# telekonsul-new
+setup firebase
