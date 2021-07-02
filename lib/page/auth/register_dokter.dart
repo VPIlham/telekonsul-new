@@ -580,11 +580,13 @@ class _RegisterDokterPageState extends State<RegisterDokterPage> {
             SetOptions(merge: true),
           );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Register berhasil, redirecting..."),
-        ),
-      );
+      if (this.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Register berhasil, redirecting..."),
+          ),
+        );
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
