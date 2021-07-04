@@ -352,9 +352,9 @@ class _TransaksiDetailDokterState extends State<TransaksiDetailDokter> {
       ),
     );
 
-    final path = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);
-    final file = File("$path/invoice_${data.docId}.pdf");
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+String appDocPath = appDocDir.path;
+    final file = File("$appDocPath/invoice_${data.docId}.pdf");
     await file.writeAsBytes(await pdf.save()).whenComplete(
           () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

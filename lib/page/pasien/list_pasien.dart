@@ -147,9 +147,9 @@ class _ListPasienState extends State<ListPasien> {
       ),
     );
 
-    final path = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);
-    final file = File("$path/laporan_pasien_${DateTime.now().toString()}.pdf");
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+String appDocPath = appDocDir.path;
+    final file = File("$appDocPath/laporan_pasien_${DateTime.now().toString()}.pdf");
     await file.writeAsBytes(await pdf.save()).whenComplete(
           () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

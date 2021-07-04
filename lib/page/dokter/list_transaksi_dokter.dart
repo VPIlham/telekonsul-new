@@ -446,10 +446,10 @@ class _ListTransaksiDokterState extends State<ListTransaksiDokter> {
       ),
     );
 
-    final path = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+String appDocPath = appDocDir.path;
     final file =
-        File("$path/laporan_transaksi_dokter${DateTime.now().toString()}.pdf");
+        File("$appDocPath/laporan_transaksi_dokter${DateTime.now().toString()}.pdf");
     await file.writeAsBytes(await pdf.save()).whenComplete(
           () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

@@ -302,8 +302,6 @@ class _KonsultasiPageState extends State<KonsultasiPage> {
 
       await Provider.of<AntrianProvider>(context, listen: false)
           .getAllAntrian(antrian.dataTransaksi.dokterProfile.uid);
-
-      Navigator.of(context).pop();
     }
   }
 }
