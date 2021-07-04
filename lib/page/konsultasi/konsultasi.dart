@@ -186,6 +186,12 @@ class _KonsultasiPageState extends State<KonsultasiPage> {
       Dokter newData = currentDokter;
       newData.isBusy = true;
       Provider.of<DokterProvider>(context, listen: false).setDokter = newData;
+
+      await FirebaseFirestore.instance
+          .doc('dokter/${currentDokter.uid}')
+          .update({
+        'is_busy': true,
+      });
     }
   }
 
@@ -213,6 +219,12 @@ class _KonsultasiPageState extends State<KonsultasiPage> {
       Dokter newData = currentDokter;
       newData.isBusy = false;
       Provider.of<DokterProvider>(context, listen: false).setDokter = newData;
+
+      await FirebaseFirestore.instance
+          .doc('dokter/${currentDokter.uid}')
+          .update({
+        'is_busy': false,
+      });
 
       await FirebaseFirestore.instance
           .doc('dokter/${currentDokter.uid}/antrian/${antrian.docId}')
@@ -287,6 +299,11 @@ class _KonsultasiPageState extends State<KonsultasiPage> {
 
       await Provider.of<AntrianProvider>(context, listen: false)
           .get7Antrian(antrian.dataTransaksi.dokterProfile.uid);
+
+      await Provider.of<AntrianProvider>(context, listen: false)
+          .getAllAntrian(antrian.dataTransaksi.dokterProfile.uid);
+
+      Navigator.of(context).pop();
     }
   }
 }
