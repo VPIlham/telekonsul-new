@@ -178,7 +178,7 @@ class _ListJadwalKonsultasiState extends State<ListJadwalKonsultasi> {
 
     final path = await ExtStorage.getExternalStoragePublicDirectory(
         ExtStorage.DIRECTORY_DOWNLOADS);
-    final file = File("$path/laporan_pasien_${DateTime.now().toString()}.pdf");
+    final file = File("$path/laporan_jadwal_konsultasi_${DateTime.now().toString()}.pdf");
     await file.writeAsBytes(await pdf.save()).whenComplete(
           () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

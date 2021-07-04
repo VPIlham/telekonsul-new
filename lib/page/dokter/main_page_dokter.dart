@@ -14,10 +14,10 @@ class _MainPageDokterState extends State<MainPageDokter> {
 
   @override
   void initState() {
-    Provider.of<AntrianProvider>(context, listen: false)
-        .get7Antrian(FirebaseAuth.instance.currentUser.uid);
-    Provider.of<PasienProvider>(context, listen: false)
-        .get7Pasien(FirebaseAuth.instance.currentUser.uid);
+    Provider.of<AntrianProvider>(context, listen: false).get7Antrian(
+        Provider.of<DokterProvider>(context, listen: false).dokter.uid);
+    Provider.of<PasienProvider>(context, listen: false).get7Pasien(
+        Provider.of<DokterProvider>(context, listen: false).dokter.uid);
     super.initState();
   }
 
