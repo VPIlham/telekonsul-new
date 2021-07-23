@@ -96,6 +96,10 @@ class _ListPasienState extends State<ListPasien> {
 
     final pdf = pw.Document();
 
+    final image = pw.MemoryImage(
+      (await rootBundle.load('assets/medlinx.png')).buffer.asUint8List(),
+    );
+
     pdf.addPage(
       pw.MultiPage(
         pageFormat:
@@ -106,7 +110,25 @@ class _ListPasienState extends State<ListPasien> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Laporan User', style: pw.Theme.of(context).header3),
+            child: pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.start,
+                children: [
+                  pw.Image(
+                    image,
+                    height: 36,
+                    width: 180,
+                    fit: pw.BoxFit.cover,
+                  ),
+                  pw.SizedBox(
+                    height: 10,
+                  ),
+                  pw.Text("Alamat : JL Fatmawati No 7, Jakarta Selatan"),
+                  pw.Text("Tgl Laporan : ${DateTime.now().toString()}"),
+                  pw.SizedBox(
+                    height: 25,
+                  ),
+                  pw.Text('Laporan User', style: pw.Theme.of(context).header3),
+                ]),
           );
         },
         build: (pw.Context context) => <pw.Widget>[
@@ -148,8 +170,9 @@ class _ListPasienState extends State<ListPasien> {
     );
 
     Directory appDocDir = await getApplicationDocumentsDirectory();
-String appDocPath = appDocDir.path;
-    final file = File("$appDocPath/laporan_pasien_${DateTime.now().toString()}.pdf");
+    String appDocPath = appDocDir.path;
+    final file =
+        File("$appDocPath/laporan_pasien_${DateTime.now().toString()}.pdf");
     await file.writeAsBytes(await pdf.save()).whenComplete(
           () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

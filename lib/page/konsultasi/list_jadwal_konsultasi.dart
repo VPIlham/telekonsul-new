@@ -126,6 +126,10 @@ class _ListJadwalKonsultasiState extends State<ListJadwalKonsultasi> {
 
     final pdf = pw.Document();
 
+    final image = pw.MemoryImage(
+      (await rootBundle.load('assets/medlinx.png')).buffer.asUint8List(),
+    );
+
     pdf.addPage(
       pw.MultiPage(
         pageFormat:
@@ -136,8 +140,26 @@ class _ListJadwalKonsultasiState extends State<ListJadwalKonsultasi> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Laporan Jadwal Konsultasi',
-                style: pw.Theme.of(context).header3),
+            child: pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.start,
+                children: [
+                  pw.Image(
+                    image,
+                    height: 36,
+                    width: 180,
+                    fit: pw.BoxFit.cover,
+                  ),
+                  pw.SizedBox(
+                    height: 10,
+                  ),
+                  pw.Text("Alamat : JL Fatmawati No 7, Jakarta Selatan"),
+                  pw.Text("Tgl Transaksi ${DateTime.now().toString()}"),
+                  pw.SizedBox(
+                    height: 25,
+                  ),
+                  pw.Text('Laporan Jadwal Konsultasi',
+                      style: pw.Theme.of(context).header3),
+                ]),
           );
         },
         build: (pw.Context context) => <pw.Widget>[

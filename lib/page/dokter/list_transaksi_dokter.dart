@@ -375,6 +375,9 @@ class _ListTransaksiDokterState extends State<ListTransaksiDokter> {
     }
 
     final pdf = pw.Document();
+    final image = pw.MemoryImage(
+      (await rootBundle.load('assets/medlinx.png')).buffer.asUint8List(),
+    );
 
     pdf.addPage(
       pw.MultiPage(
@@ -386,8 +389,28 @@ class _ListTransaksiDokterState extends State<ListTransaksiDokter> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Laporan Transaksi',
-                style: pw.Theme.of(context).header3),
+            child: pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.start,
+                children: [
+                  pw.Image(
+                    image,
+                    height: 36,
+                    width: 180,
+                    fit: pw.BoxFit.cover,
+                  ),
+                  pw.SizedBox(
+                    height: 10,
+                  ),
+                  pw.Text("Alamat : JL Fatmawati No 7, Jakarta Selatan"),
+                  pw.Text(
+                      "Nama Dokter : dr ${data[0].dokterProfile.nama} (${data[0].dokterProfile.spesialis})"),
+                  pw.Text("Tgl Transaksi : ${DateTime.now().toString()}"),
+                  pw.SizedBox(
+                    height: 25,
+                  ),
+                  pw.Text('Laporan Transaksi',
+                      style: pw.Theme.of(context).header3),
+                ]),
           );
         },
         build: (pw.Context context) => <pw.Widget>[
@@ -447,9 +470,9 @@ class _ListTransaksiDokterState extends State<ListTransaksiDokter> {
     );
 
     Directory appDocDir = await getApplicationDocumentsDirectory();
-String appDocPath = appDocDir.path;
-    final file =
-        File("$appDocPath/laporan_transaksi_dokter${DateTime.now().toString()}.pdf");
+    String appDocPath = appDocDir.path;
+    final file = File(
+        "$appDocPath/laporan_transaksi_dokter${DateTime.now().toString()}.pdf");
     await file.writeAsBytes(await pdf.save()).whenComplete(
           () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
