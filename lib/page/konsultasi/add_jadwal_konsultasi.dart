@@ -60,7 +60,7 @@ class _AddJadwalKonsultasiState extends State<AddJadwalKonsultasi> {
         _startTime = pickedTime;
         _endTime = pickedTime.replacing(
           hour: pickedTime.hour,
-          minute: pickedTime.minute + 30,
+          minute: pickedTime.minute + 15,
         );
       });
     }
@@ -267,8 +267,10 @@ class _AddJadwalKonsultasiState extends State<AddJadwalKonsultasi> {
     }
 
     DateTime now = DateTime.now();
-    DateTime jamMulai = DateTime(now.year, now.month, now.day, _startTime.hour, _startTime.minute);
-    DateTime jamAkhir = DateTime(now.year, now.month, now.day, _endTime.hour, _endTime.minute);
+    DateTime jamMulai = DateTime(
+        now.year, now.month, now.day, _startTime.hour, _startTime.minute);
+    DateTime jamAkhir =
+        DateTime(now.year, now.month, now.day, _endTime.hour, _endTime.minute);
 
     Map<String, dynamic> data = {
       'hari': _selectedDay.toJson(),

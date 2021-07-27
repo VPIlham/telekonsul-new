@@ -313,6 +313,9 @@ class _TransaksiDetailState extends State<TransaksiDetail> {
       (await rootBundle.load('assets/medlinx.png')).buffer.asUint8List(),
     );
 
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('dd-MM-yyyy').format(now);
+
     pdf.addPage(
       pw.MultiPage(
         pageFormat:
@@ -390,6 +393,22 @@ class _TransaksiDetailState extends State<TransaksiDetail> {
             ],
           ),
           pw.Padding(padding: const pw.EdgeInsets.all(10)),
+          pw.SizedBox(height: 30),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Column(
+                children: [
+                  pw.Text("Jakarta, ${formattedDate.toString()}"),
+                  pw.SizedBox(
+                    height: 50,
+                  ),
+                  pw.Text(
+                      "dr ${data.dokterProfile.nama} (${data.dokterProfile.spesialis})"),
+                ],
+              )
+            ],
+          ),
         ],
       ),
     );

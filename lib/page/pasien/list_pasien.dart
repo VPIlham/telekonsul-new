@@ -100,6 +100,9 @@ class _ListPasienState extends State<ListPasien> {
       (await rootBundle.load('assets/medlinx.png')).buffer.asUint8List(),
     );
 
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('dd-MM-yyyy').format(now);
+
     pdf.addPage(
       pw.MultiPage(
         pageFormat:
@@ -165,6 +168,21 @@ class _ListPasienState extends State<ListPasien> {
               text: "Total Pasien : ${data.length}",
               textAlign: pw.TextAlign.right),
           pw.Padding(padding: const pw.EdgeInsets.all(10)),
+          pw.SizedBox(height: 30),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Column(
+                children: [
+                  pw.Text("Jakarta, ${formattedDate.toString()}"),
+                  pw.SizedBox(
+                    height: 50,
+                  ),
+                  pw.Text("Admin"),
+                ],
+              )
+            ],
+          ),
         ],
       ),
     );
